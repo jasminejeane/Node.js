@@ -12,7 +12,7 @@ function printMessage(username, badgeCount, point){
 
 function getProfile(username){
 
-
+try{
 const request = https.get(`https://teamtreehouse.com/${username}.json`, response => {
   // console.log(response.statusCode);
   // Read data
@@ -25,12 +25,16 @@ const request = https.get(`https://teamtreehouse.com/${username}.json`, response
     const profile = JSON.parse(body);
     // console.dir(profile);
     printMessage(username, profile.badges.length, profile.points.JavaScript);
-  })
+  });
 
 
   // Print data
-})
+});
 
+request.on('error', error => console.error(`Problem with request:  ${error.message}`));
+} catch(error){
+  console.error(error.message);
+}
 }
 const users = process.argv.slice(2);
 
