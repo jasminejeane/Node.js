@@ -3,11 +3,11 @@
 const https = require('https');
 // const username = 'chalkers';
 
-
+const http = require('http');
 // print error messages
 
 function printError(error){
-  printError(error);
+  console.log(error.message);
 }
 
 function printMessage(username, badgeCount, point){
@@ -42,8 +42,9 @@ const request = https.get(`https://teamtreehouse.com/${username}.json`, response
   });
 
 }else{
-  const message = `There was an error getting the profile for ${username} ({$response.statusCode})`;
-  const statusCodeError = new Error();
+  const message = `There was an error getting the profile for ${username} (${http.STATUS_CODES[response.statusCode]})`;
+  const statusCodeError = new Error(message);
+  printError(statusCodeError);
 }
   // Print data
 });
