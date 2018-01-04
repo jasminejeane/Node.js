@@ -1,5 +1,6 @@
-const weather = ('./weather');
-const query = process.argv.slice(2).join("_").replace('', '_');
+const weather = require('./weather');
+const query = process.argv.slice(2).join("_").replace(' ', '_');
 
 
 weather.get(query);
+// console.log(query);
